@@ -10,6 +10,7 @@ let obj1 = {
 };
 localStorage.setItem("data", JSON.stringify(obj1));
 
+
 addform.addEventListener("submit", function (e) {
   console.log("name :", inputname.value);
   e.preventDefault();
@@ -39,13 +40,25 @@ addform.addEventListener("submit", function (e) {
 
   arr.push(obj);
   if (
-    obj.name !== obj1.ilk[0] &&
+    obj.name === obj1.ilk[0] &&
+    obj.surname === obj1.ilk[1] &&
+    obj.password === obj1.ilk[2]
+  ) {
+    alert("telebe tapildi");
+  } else if (
+    obj.name === obj1.ilk[0] &&
     obj.surname !== obj1.ilk[1] &&
     obj.password !== obj1.ilk[2]
   ) {
-    alert("telebe tapilmadi");
+    alert("soyad ve ya telefon tapilmadi");
+  } else if (
+    obj.name !== obj1.ilk[0] &&
+    obj.surname === obj1.ilk[1] &&
+    obj.password !== obj1.ilk[2]
+  ) {
+    alert("ad ve ya telefon tapilmadi");
   } else {
-    alert("telebe tapildi");
+    alert("telebe tapilmadi");
   }
   localStorage.setItem("data", JSON.stringify(obj));
   e.preventDefault();

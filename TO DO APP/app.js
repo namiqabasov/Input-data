@@ -5,11 +5,12 @@ const myInput = document.querySelector(".myInput");
 const myDiv = document.querySelector(".myDiv");
 const yeni = document.querySelector(".yeni");
 const btn = document.querySelector(".btn");
-let arr = [];
+let deyisen;
 
 myForm.addEventListener("submit", function (e) {
   if (myInput.value === "") {
     alert("yazi daxil edin");
+    return;
   } else {
     const yeniDiv = document.createElement("div");
     const yeniDiv2 = document.createElement("div");
@@ -34,29 +35,25 @@ myForm.addEventListener("submit", function (e) {
     yeniDiv.appendChild(yeniDiv2);
     myDiv.appendChild(yeniDiv);
 
-    arr.push(myInput.value);
-    console.log(arr);
     divRemov.addEventListener("click", function () {
       yeniDiv.remove();
     });
-    if (edit.innerText !== "") {
-      btnEdit.remove();
-    } else {
-      arr.forEach((e, i) => {
-        divEdit.addEventListener("click", function () {
-          myInput.value = arr[i];
 
-          edit.appendChild(btnEdit);
-          
-          btnEdit.addEventListener("click", function () {
-            myValue.innerHTML = myInput.value;
-            btnEdit.remove();
-            myInput.value = "";
+    divEdit.addEventListener("click", function () {
+      myInput.value = myValue.innerHTML;
+      if (edit.innerHTML === "") {
+        edit.appendChild(btnEdit);
+      } else {
+        edit.innerHTML = "";
+        edit.appendChild(btnEdit);
+      }
 
-          });
-        });
+      btnEdit.addEventListener("click", function () {
+        myValue.innerHTML = myInput.value;
+        btnEdit.remove();
+        myInput.value = "";
       });
-    }
+    });
 
     myInput.value = "";
 
